@@ -7,48 +7,65 @@
    `frame-ancestors` é ignorado por especificação quando entregue via
    <meta> — só vale como cabeçalho.
 
-   Então isto é a mitigação possível, não a ideal. Ela cobre o caso comum
-   (página maliciosa embute o site e sobrepõe elementos para roubar
-   cliques), mas pode ser neutralizada por um iframe com
-   `sandbox="allow-scripts"` sem `allow-top-navigation`, que impede o
-   próprio script de escapar.
+   Esta é a mitigação possível, e ela tem um limite importante que foi
+   verificado na prática:
 
-   Ou seja: isto reduz o risco, não o elimina. A correção definitiva é
-   migrar para uma hospedagem que envie os cabeçalhos — o arquivo
-   deploy/_headers do repositório já está pronto para isso.
+   O truque clássico de "escapar do iframe" com
+   `window.top.location = ...` NÃO funciona mais. O navegador bloqueia
+   navegação da janela do topo vinda de um iframe de outra origem quando
+   não há gesto do usuário — e o pior: bloqueia em silêncio, sem lançar
+   erro. Confiar nele deixaria o site desprotegido achando que está
+   protegido.
+
+   Por isso a ordem aqui é invertida: primeiro esconde o conteúdo (o que
+   sempre funciona, porque é dentro do nosso próprio documento), e só
+   depois tenta escapar como bônus. Assim, mesmo com a navegação
+   bloqueada, o visitante não interage com uma cópia sobreposta do site.
+
+   A correção definitiva continua sendo migrar para uma hospedagem que
+   envie cabeçalhos — deploy/_headers já está pronto para isso.
    ===================================================================== */
+
+function montarAviso() {
+  const aviso = document.createElement('div')
+  aviso.setAttribute('data-antienquadramento', '')
+  aviso.setAttribute(
+    'style',
+    'position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;' +
+      'padding:2rem;text-align:center;background:#0c2140;color:#fff;' +
+      'font-family:system-ui,-apple-system,sans-serif;line-height:1.6',
+  )
+  aviso.innerHTML =
+    '<div><strong style="display:block;font-size:1.25rem;margin-bottom:.5rem">' +
+    'Esta página está sendo exibida dentro de outro site</strong>' +
+    '<span style="opacity:.85">Por segurança, o conteúdo foi ocultado. ' +
+    'Acesse o site verdadeiro em:</span><br>' +
+    '<a href="https://rvautopecas.com.br/" target="_blank" rel="noopener noreferrer" ' +
+    'style="display:inline-block;margin-top:1rem;color:#00c5ae;font-weight:600">' +
+    'rvautopecas.com.br</a></div>'
+  return aviso
+}
 
 export function protegerContraEnquadramento() {
   // Mesma janela: não está em iframe nenhum, nada a fazer.
   if (window.top === window.self) return
 
+  // 1) Esconde o conteúdo. Isto acontece dentro do nosso documento, então
+  //    nunca é bloqueado — é a parte da defesa em que dá para confiar.
+  const aplicar = () => {
+    const raiz = document.getElementById('root')
+    if (raiz) raiz.style.display = 'none'
+    document.body.appendChild(montarAviso())
+  }
+
+  if (document.body) aplicar()
+  else document.addEventListener('DOMContentLoaded', aplicar)
+
+  // 2) Tenta sair do iframe. Costuma ser bloqueado sem gesto do usuário,
+  //    e o bloqueio é silencioso — por isso é bônus, não a defesa.
   try {
-    // Navegar a janela do topo é permitido mesmo entre origens
-    // diferentes (ler o endereço dela é que não é). Se o iframe estiver
-    // com sandbox restritivo, esta linha lança e caímos no catch.
     window.top.location.replace(window.self.location.href)
   } catch {
-    // Não conseguimos escapar. Então escondemos o conteúdo, para o
-    // visitante não interagir com uma cópia sobreposta do site, e
-    // deixamos um aviso com o endereço verdadeiro.
-    const aviso = document.createElement('div')
-    aviso.setAttribute(
-      'style',
-      'position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;' +
-        'padding:2rem;text-align:center;background:#0c2140;color:#fff;' +
-        "font-family:system-ui,sans-serif;line-height:1.6",
-    )
-    aviso.innerHTML =
-      '<div><strong style="display:block;font-size:1.25rem;margin-bottom:.5rem">' +
-      'Esta página está sendo exibida dentro de outro site</strong>' +
-      '<span style="opacity:.85">Por segurança, o conteúdo foi ocultado. ' +
-      'Acesse diretamente:</span><br>' +
-      '<a href="https://rvautopecas.com.br/" target="_top" ' +
-      'style="display:inline-block;margin-top:1rem;color:#00c5ae;font-weight:600">' +
-      'rvautopecas.com.br</a></div>'
-
-    // Espera o body existir — o script roda antes do React desenhar.
-    if (document.body) document.body.appendChild(aviso)
-    else document.addEventListener('DOMContentLoaded', () => document.body.appendChild(aviso))
+    /* esperado quando o iframe tem sandbox restritivo */
   }
 }
