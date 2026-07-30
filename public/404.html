@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página não encontrada — RV Auto Peças</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="/img/favicon.png" />
+    <style>
+      /* Página independente de propósito: não carrega o React nem fontes
+         externas, para abrir instantâneo mesmo em conexão ruim. */
+      :root {
+        --azul: #1c4982;
+        --azul-noite: #0c2140;
+        --teal: #009d8b;
+        --texto: #16273d;
+        --texto-fraco: #5a6b80;
+        --claro: #f4f7fa;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 2rem 1.5rem;
+        font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+        line-height: 1.65;
+        color: var(--texto);
+        background: var(--claro);
+      }
+      .caixa {
+        max-width: 34rem;
+        text-align: center;
+        background: #fff;
+        border: 1px solid #dfe6ee;
+        border-radius: 1.5rem;
+        padding: 3rem 2rem;
+        box-shadow: 0 12px 32px rgba(18, 48, 89, 0.08);
+      }
+      img { height: 56px; width: auto; margin-bottom: 1.5rem; }
+      h1 { font-size: 1.6rem; margin: 0 0 0.5rem; color: var(--azul-noite); }
+      p { color: var(--texto-fraco); margin: 0 0 1.5rem; }
+      .acoes { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+      a {
+        display: inline-block;
+        padding: 0.8rem 1.5rem;
+        border-radius: 999px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: opacity 0.2s;
+      }
+      a:hover { opacity: 0.85; }
+      .principal { background: var(--teal); color: #fff; }
+      .secundario { border: 2px solid #dfe6ee; color: var(--azul); }
+      .zap { background: #25d366; color: #fff; }
+      small { display: block; margin-top: 1.75rem; color: var(--texto-fraco); font-size: 0.85rem; }
+    </style>
+  </head>
+  <body>
+    <div class="caixa">
+      <img src="/img/logo.png" alt="RV Auto Peças" />
+      <h1>Essa página não existe mais</h1>
+      <p>
+        O endereço que você acessou é de uma versão antiga do nosso site. A loja
+        continua no mesmo lugar — é só seguir por aqui.
+      </p>
+      <div class="acoes">
+        <a class="principal" href="/">Ir para o site</a>
+        <a class="secundario" href="/#pecas">Ver as peças</a>
+        <a
+          class="zap"
+          href="https://wa.me/5511919380470?text=Ol%C3%A1%2C%20preciso%20de%20uma%20pe%C3%A7a"
+          >Falar no WhatsApp</a
+        >
+      </div>
+      <small>
+        Av. Engenheiro Caetano Álvares, 5202 — Imirim, São Paulo/SP<br />
+        Seg a sex 8h–18h · Sáb 8h–13h · (11) 4210-4600
+      </small>
+    </div>
+  </body>
+</html>
