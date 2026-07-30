@@ -20,7 +20,7 @@ const linksAtendimento = [
 ]
 
 /** Um cartão de contato do topo do rodapé. */
-function CartaoContato({ icone: Icone, titulo, linhas, href, destaque = false }) {
+function CartaoContato({ icone: Icone, titulo, linhas, href, destaque = false, className = '' }) {
   const conteudo = (
     <>
       <span
@@ -41,8 +41,7 @@ function CartaoContato({ icone: Icone, titulo, linhas, href, destaque = false })
     </>
   )
 
-  const classe =
-    'flex items-start gap-4 rounded-marca-lg border border-white/10 bg-white/5 p-5 transition-colors duration-300'
+  const classe = `flex items-start gap-4 rounded-marca-lg border border-white/10 bg-white/5 p-5 transition-colors duration-300 ${className}`
 
   if (href) {
     const externo = href.startsWith('http')
@@ -99,11 +98,15 @@ export default function Footer() {
                 href={info.href}
               />
             ))}
+            {/* Ocupa as duas colunas: são 9 cartões numa grade de 2, e sem
+                isto o último sobraria sozinho deixando um buraco à direita.
+                Como é o cartão de ação, ganhar a linha inteira cai bem. */}
             <CartaoContato
               icone={Navigation}
               titulo="Como chegar"
               linhas={['Traçar rota no Google Maps']}
               href={contato.rota}
+              className="sm:col-span-2"
             />
           </Reveal>
 

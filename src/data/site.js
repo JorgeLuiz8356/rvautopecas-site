@@ -11,7 +11,7 @@ import {
   CircleParking,
   Clock,
   CreditCard,
-  Droplets,
+  Store,
   Mail,
   Headphones,
   Instagram,
@@ -354,7 +354,7 @@ export const infoContato = [
     href: `mailto:${contato.email}`,
   },
   {
-    icone: Droplets,
+    icone: Store,
     titulo: 'O que fazemos',
     linhas: ['Loja de autopeças', 'Não fazemos instalação', 'Venda no balcão e por WhatsApp'],
   },
