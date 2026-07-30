@@ -1,0 +1,57 @@
+# Publica o site no GitHub Pages a cada push na branch main.
+#
+# Não é preciso subir a pasta dist/ para o repositório: o GitHub roda o
+# build sozinho aqui e publica o resultado. Assim o que está versionado é
+# só o código-fonte.
+name: Publicar site
+
+on:
+  push:
+    branches: [main]
+  # Permite disparar na mão pela aba Actions do GitHub.
+  workflow_dispatch:
+
+# Permissões mínimas necessárias para publicar no Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Se dois pushes acontecerem juntos, deixa o mais novo terminar e cancela
+# o anterior — evita duas publicações disputando.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  construir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Gerar o site
+        run: npm run build
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  publicar:
+    needs: construir
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

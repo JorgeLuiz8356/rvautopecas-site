@@ -1,0 +1,117 @@
+/* As fontes vêm do próprio site, não do Google. Ver src/fontes.css. */
+@import './fontes.css';
+@import 'tailwindcss';
+
+/* =====================================================================
+   RV AUTO PEÇAS — tema da marca
+   ---------------------------------------------------------------------
+   Tudo que é cor, fonte, raio e sombra da marca mora aqui dentro do
+   @theme. O Tailwind gera as classes sozinho a partir destas variáveis:
+   --color-azul  ->  bg-azul, text-azul, border-azul...
+   Mudou aqui, muda no site inteiro.
+   ===================================================================== */
+@theme {
+  /* ---- Cores da marca ---- */
+  --color-azul: #1c4982;
+  --color-azul-esc: #123059;
+  --color-azul-noite: #0c2140;
+  --color-teal: #009d8b;
+  --color-teal-claro: #00c5ae;
+  --color-teal-fraco: #e6f6f4;
+  --color-verde: #78d64b;
+  --color-zap: #25d366;
+
+  /* ---- Neutros ---- */
+  --color-claro: #f4f7fa;
+  --color-borda: #dfe6ee;
+  --color-texto: #16273d;
+  --color-texto-fraco: #5a6b80;
+  --color-texto-luz: #b8cbe0;
+
+  /* ---- Tipografia ---- */
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-titulo: 'Poppins', 'Inter', sans-serif;
+
+  /* ---- Bordas arredondadas ---- */
+  --radius-marca: 1rem;
+  --radius-marca-lg: 1.5rem;
+
+  /* ---- Sombras suaves ---- */
+  --shadow-suave: 0 2px 4px rgba(18, 48, 89, 0.04), 0 12px 32px rgba(18, 48, 89, 0.08);
+  --shadow-alta: 0 12px 24px rgba(18, 48, 89, 0.1), 0 32px 64px rgba(18, 48, 89, 0.14);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* header fixo não pode cobrir o título da seção ao pular pela âncora */
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    @apply bg-white font-sans text-[17px] leading-relaxed text-texto antialiased;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-titulo font-bold leading-tight tracking-tight;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-[3px] outline-teal;
+    border-radius: 4px;
+  }
+
+  /* Respeita quem pediu menos animação no sistema operacional. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Pontinho verde que pulsa nas etiquetas de seção. */
+  @keyframes pulso-marca {
+    0% {
+      box-shadow: 0 0 0 0 rgba(120, 214, 75, 0.55);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(120, 214, 75, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(120, 214, 75, 0);
+    }
+  }
+
+  .animate-pulso-marca {
+    animation: pulso-marca 2.2s infinite;
+  }
+
+  /* Faixa que rola sem parar (marcas). A lista é renderizada duas vezes
+     lado a lado e a animação anda exatamente metade da largura — quando
+     chega no fim, a segunda cópia está no lugar da primeira e o laço não
+     tem emenda visível. */
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee var(--marquee-duracao, 40s) linear infinite;
+  }
+}

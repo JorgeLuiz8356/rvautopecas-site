@@ -1,0 +1,53 @@
+LOGOS DAS MARCAS
+================
+
+Salve os arquivos de logo NESTA pasta. O site acha cada um sozinho — você
+não precisa editar código nenhum.
+
+A ligação é feita pelo NOME DO ARQUIVO: tire acento, espaço e hífen do
+nome da marca e use tudo minúsculo.
+
+  Marca              ->  Nome do arquivo
+  -------------------------------------------
+  Bosch              ->  bosch.svg
+  Cofap              ->  cofap.svg
+  Nakata             ->  nakata.svg
+  SKF                ->  skf.svg
+  Fras-le            ->  frasle.svg
+  Monroe             ->  monroe.svg
+  Tecfil             ->  tecfil.svg
+  Magneti Marelli    ->  magnetimarelli.svg
+  NGK                ->  ngk.svg
+  Gates              ->  gates.svg
+  Valeo              ->  valeo.svg
+  Sabó               ->  sabo.svg
+  TRW                ->  trw.svg
+  Mann               ->  mann.svg
+
+Serve .svg, .png ou .webp. A extensão não importa para a busca: se você
+salvar bosch.png em vez de bosch.svg, funciona igual.
+
+Marca sem arquivo continua aparecendo com o nome escrito, e a faixa não
+quebra. Dá para ir colocando um por um.
+
+COMO A IMAGEM APARECE
+---------------------
+O logo entra com 32px de altura, em escala de cinza e um pouco apagado,
+e fica colorido quando o mouse passa em cima. Isso deixa marcas de cores
+muito diferentes com aparência uniforme na faixa.
+
+Por isso, prefira:
+- SVG (fica nítido em qualquer tela e pesa pouco), ou PNG com FUNDO
+  TRANSPARENTE — PNG com fundo branco vira um retângulo branco na faixa.
+- A versão horizontal do logo, não a empilhada.
+- A versão colorida. O site já converte para cinza sozinho.
+
+ONDE CONSEGUIR OS ARQUIVOS
+--------------------------
+O caminho mais seguro é o material oficial de cada fabricante: procure no
+site da marca por "imprensa", "sala de imprensa", "brand kit" ou "manual
+da marca". Seu representante de vendas de cada fornecedor normalmente
+também tem esse pacote e manda por e-mail.
+
+Evite baixar de site aleatório de "logos grátis": costuma vir versão
+antiga da marca, em resolução ruim ou com marca d'água.

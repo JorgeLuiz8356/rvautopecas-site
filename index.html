@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>RV Auto Peças — Autopeças na Zona Norte de São Paulo</title>
+    <meta
+      name="description"
+      content="Loja de autopeças no Imirim, Zona Norte de São Paulo. Av. Engenheiro Caetano Álvares, 5202. Peças de marca, orçamento pelo WhatsApp e entrega em até 1 hora."
+    />
+    <meta name="theme-color" content="#1c4982" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="RV Auto Peças — Muito mais que autopeças" />
+    <meta
+      property="og:description"
+      content="Autopeças na Zona Norte de São Paulo. Orçamento pelo WhatsApp e entrega em até 1 hora."
+    />
+    <!-- og:image e og:url precisam ser endereço completo: o WhatsApp e as
+         redes leem isto de fora, e caminho relativo não resolve lá. -->
+    <meta
+      property="og:image"
+      content="https://jorgeluiz8356.github.io/rvautopecas-site/img/og.jpg"
+    />
+    <meta property="og:url" content="https://jorgeluiz8356.github.io/rvautopecas-site/" />
+    <meta property="og:locale" content="pt_BR" />
+
+    <link rel="icon" href="./img/favicon.png" />
+
+    <!-- As fontes Poppins e Inter são servidas pelo próprio site (ver
+         src/fontes.css). Nada é buscado no Google, então o IP de quem
+         visita não sai daqui. -->
+
+    <!-- Regras de segurança aplicadas pelo próprio navegador.
+         default-src 'self': só carrega o que vier deste site.
+         style-src precisa de 'unsafe-inline' porque as animações escrevem
+         estilo direto no elemento; isso vale para atributo style, não
+         libera execução de script.
+         frame-src libera só o mapa do Google, e apenas quando o visitante
+         clica para carregá-lo. -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self';
+               base-uri 'self';
+               object-src 'none';
+               form-action 'none';
+               frame-ancestors 'none';
+               img-src 'self' data:;
+               font-src 'self';
+               style-src 'self' 'unsafe-inline';
+               script-src 'self';
+               connect-src 'self';
+               frame-src https://www.google.com;"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <link rel="canonical" href="https://jorgeluiz8356.github.io/rvautopecas-site/" />
+
+    <!-- Ficha da loja para o Google. É isto que alimenta a busca local
+         ("autopeças perto de mim"), o horário que aparece no resultado e o
+         pino no mapa. Para loja de bairro, é a parte mais importante do SEO.
+         Se o endereço, o telefone ou o horário mudarem, mude aqui também. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "AutoPartsStore",
+        "@id": "https://jorgeluiz8356.github.io/rvautopecas-site/#loja",
+        "name": "RV Auto Peças",
+        "slogan": "Muito mais que autopeças",
+        "description": "Loja de autopeças no Imirim, Zona Norte de São Paulo. Peças de marca, orçamento pelo WhatsApp e entrega em até 1 hora.",
+        "url": "https://jorgeluiz8356.github.io/rvautopecas-site/",
+        "logo": "https://jorgeluiz8356.github.io/rvautopecas-site/img/logo.png",
+        "image": "https://jorgeluiz8356.github.io/rvautopecas-site/img/og.jpg",
+        "foundingDate": "2017",
+        "taxID": "27.499.963/0001-38",
+        "priceRange": "$$",
+        "currenciesAccepted": "BRL",
+        "paymentAccepted": "Pix, Cartão de crédito, Cartão de débito, Dinheiro",
+        "amenityFeature": {
+          "@type": "LocationFeatureSpecification",
+          "name": "Estacionamento na porta da loja",
+          "value": true
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Engenheiro Caetano Álvares, 5202",
+          "addressLocality": "São Paulo",
+          "addressRegion": "SP",
+          "postalCode": "02431-010",
+          "addressCountry": "BR"
+        },
+        "areaServed": {
+          "@type": "City",
+          "name": "São Paulo"
+        },
+        "telephone": "+551142104600",
+        "email": "rvautopecas@rvautopecas.com.br",
+        "sameAs": ["https://www.instagram.com/rvautopecas"],
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "08:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "08:00",
+            "closes": "13:00"
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- Sem JavaScript o React não desenha nada e o visitante veria uma
+         página em branco. Este bloco garante que ele ao menos saia com o
+         endereço, o telefone e o horário. -->
+    <noscript>
+      <div
+        style="
+          max-width: 42rem;
+          margin: 0 auto;
+          padding: 3rem 1.5rem;
+          font-family: system-ui, sans-serif;
+          line-height: 1.65;
+          color: #16273d;
+        "
+      >
+        <h1 style="font-size: 1.75rem; margin-bottom: 0.5rem">RV Auto Peças</h1>
+        <p style="color: #5a6b80; margin-top: 0">
+          Muito mais que autopeças — loja de autopeças na Zona Norte de São Paulo,
+          desde 2017.
+        </p>
+        <p>
+          Este site precisa de JavaScript para funcionar por completo. Enquanto
+          isso, os dados da loja:
+        </p>
+        <ul>
+          <li>
+            <strong>Endereço:</strong> Av. Engenheiro Caetano Álvares, 5202 —
+            Imirim, São Paulo/SP, CEP 02431-010
+          </li>
+          <li><strong>Telefone:</strong> <a href="tel:+551142104600">(11) 4210-4600</a></li>
+          <li>
+            <strong>WhatsApp:</strong>
+            <a href="https://wa.me/5511919380470">(11) 91938-0470</a>
+          </li>
+          <li>
+            <strong>E-mail:</strong>
+            <a href="mailto:rvautopecas@rvautopecas.com.br">rvautopecas@rvautopecas.com.br</a>
+          </li>
+          <li><strong>Horário:</strong> segunda a sexta 8h–18h, sábado 8h–13h</li>
+        </ul>
+        <p>Entrega em até 1 hora. Não fazemos instalação — somos loja de peças.</p>
+      </div>
+    </noscript>
+
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

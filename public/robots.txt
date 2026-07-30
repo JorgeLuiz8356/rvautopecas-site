@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jorgeluiz8356.github.io/rvautopecas-site/sitemap.xml

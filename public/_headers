@@ -1,0 +1,34 @@
+# Cabeçalhos de segurança.
+#
+# Este arquivo é lido automaticamente por Netlify e Cloudflare Pages.
+# O GitHub Pages NÃO suporta cabeçalhos personalizados — lá valem apenas as
+# regras do <meta> Content-Security-Policy no index.html, que já cobrem a
+# maior parte. Se puder escolher a hospedagem, prefira uma que leia isto.
+
+/*
+  # Impede que o site seja embutido em iframe de terceiros (clickjacking).
+  X-Frame-Options: DENY
+
+  # Impede o navegador de "adivinhar" o tipo do arquivo, o que já foi usado
+  # para fazer um arquivo inofensivo ser executado como script.
+  X-Content-Type-Options: nosniff
+
+  # Ao sair do site, envia no máximo o domínio de origem, nunca a URL cheia.
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Desliga recursos que este site não usa. Se algo for injetado um dia,
+  # já não consegue pedir câmera, microfone nem localização.
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()
+
+  # Obriga o navegador a só voltar por HTTPS pelos próximos 2 anos.
+  # ATENÇÃO: só ative depois de confirmar que o HTTPS está funcionando.
+  Strict-Transport-Security: max-age=63072000; includeSubDomains
+
+  # Mesma política do <meta> no index.html, aqui em forma de cabeçalho —
+  # que é mais forte, porque vale antes mesmo do HTML ser interpretado.
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; frame-src https://www.google.com
+
+# As fontes têm nome com hash e nunca mudam de conteúdo: pode guardar por
+# um ano no navegador do visitante.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
