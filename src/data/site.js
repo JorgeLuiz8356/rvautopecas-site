@@ -35,8 +35,8 @@ export const empresa = {
 export const contato = {
   // O número do WhatsApp vai sem espaço e com o 55 na frente — é o formato
   // que o link wa.me exige.
-  whatsapp: '5511919380470',
-  whatsappVisivel: '(11) 91938-0470',
+  whatsapp: '5511950952081',
+  whatsappVisivel: '(11) 95095-2081',
   telefone: '+551142104600',
   telefoneVisivel: '(11) 4210-4600',
   email: 'rvautopecas@rvautopecas.com.br',
