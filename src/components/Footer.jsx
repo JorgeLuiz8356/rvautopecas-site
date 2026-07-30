@@ -32,8 +32,11 @@ function CartaoContato({ icone: Icone, titulo, linhas, href, destaque = false, c
       </span>
       <span className="min-w-0">
         <strong className="block text-[0.95rem] font-semibold text-white">{titulo}</strong>
+        {/* break-words é essencial aqui: o e-mail é uma palavra só, sem
+            espaço, e sem ponto de quebra o navegador desenha o texto para
+            fora do cartão em vez de passar para a linha de baixo. */}
         {linhas.map((linha) => (
-          <span key={linha} className="block text-sm text-texto-luz">
+          <span key={linha} className="block break-words text-sm text-texto-luz">
             {linha}
           </span>
         ))}
