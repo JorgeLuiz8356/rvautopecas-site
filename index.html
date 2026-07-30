@@ -33,25 +33,36 @@
          visita não sai daqui. -->
 
     <!-- Regras de segurança aplicadas pelo próprio navegador.
+
          default-src 'self': só carrega o que vier deste site.
          style-src precisa de 'unsafe-inline' porque as animações escrevem
          estilo direto no elemento; isso vale para atributo style, não
          libera execução de script.
          frame-src libera só o mapa do Google, e apenas quando o visitante
-         clica para carregá-lo. -->
+         clica para carregá-lo.
+         upgrade-insecure-requests: força qualquer recurso http:// a ser
+         buscado por https://.
+
+         NOTA: `frame-ancestors` NÃO está aqui de propósito. Ela é ignorada
+         por especificação quando a CSP vem por <meta> — só funciona como
+         cabeçalho HTTP. Deixá-la aqui daria falsa sensação de proteção.
+         A proteção contra clickjacking neste site é feita por JavaScript
+         (src/lib/antiEnquadramento.js), que é mitigação parcial. A defesa
+         real está em deploy/_headers, para quando a hospedagem permitir
+         cabeçalhos. -->
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self';
                base-uri 'self';
                object-src 'none';
                form-action 'none';
-               frame-ancestors 'none';
                img-src 'self' data:;
                font-src 'self';
                style-src 'self' 'unsafe-inline';
                script-src 'self';
                connect-src 'self';
-               frame-src https://www.google.com;"
+               frame-src https://www.google.com;
+               upgrade-insecure-requests;"
     />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
 

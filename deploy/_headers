@@ -32,3 +32,14 @@
 # um ano no navegador do visitante.
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
+
+# --------------------------------------------------------------------
+# COMO USAR
+# Este arquivo NAO esta em public/ de proposito: no GitHub Pages ele seria
+# publicado sem efeito nenhum, apenas entregando a configuracao pretendida
+# a quem estivesse olhando.
+#
+# Ao migrar para Netlify ou Cloudflare Pages, mova de volta:
+#     mv deploy/_headers public/_headers
+# e refaca o build. A partir dai os cabecalhos passam a valer de verdade.
+# --------------------------------------------------------------------

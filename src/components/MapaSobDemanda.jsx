@@ -19,12 +19,17 @@ export default function MapaSobDemanda() {
 
   if (carregado) {
     return (
+      // sandbox limita o que o mapa pode fazer dentro da nossa página.
+      // Scripts e same-origin o Google Maps precisa para funcionar; o que
+      // fica de fora é o que importa: ele não pode navegar a nossa aba
+      // (allow-top-navigation), abrir downloads nem enviar formulários.
       <iframe
         src={contato.mapa}
         title={`Mapa: ${endereco.rua}`}
         loading="lazy"
         referrerPolicy="no-referrer"
-        allowFullScreen
+        sandbox="allow-scripts allow-same-origin allow-popups"
+        allow="fullscreen"
         className="h-[340px] w-full lg:h-[420px]"
       />
     )
