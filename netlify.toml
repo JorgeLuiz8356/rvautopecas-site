@@ -1,0 +1,64 @@
+# =====================================================================
+# Configuração para hospedar na Netlify
+# ---------------------------------------------------------------------
+# Este arquivo fica na raiz do repositório e a Netlify o lê sozinha. Ele
+# faz duas coisas: diz como gerar o site e define os cabeçalhos de
+# segurança que o GitHub Pages não consegue enviar.
+#
+# Enquanto o site estiver no GitHub Pages, este arquivo é inofensivo —
+# não é publicado nem afeta nada.
+# =====================================================================
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# ---------------------------------------------------------------------
+# Cabeçalhos de segurança, aplicados a todas as páginas.
+# ---------------------------------------------------------------------
+[[headers]]
+  for = "/*"
+
+  [headers.values]
+    # Impede que o site seja embutido em iframe de terceiro. Esta é a
+    # defesa REAL contra clickjacking — a proteção por JavaScript que
+    # existe no código é só mitigação, para o período em que não havia
+    # como enviar cabeçalho.
+    X-Frame-Options = "DENY"
+
+    # Impede o navegador de "adivinhar" o tipo do arquivo.
+    X-Content-Type-Options = "nosniff"
+
+    # Ao sair do site, envia no máximo o domínio, nunca a URL cheia.
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+    # Desliga recursos que o site não usa. Se algo for injetado um dia,
+    # já não consegue pedir câmera, microfone nem localização.
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=(), usb=()"
+
+    # Obriga o navegador a só voltar por HTTPS pelos próximos 2 anos.
+    #
+    # SEM `includeSubDomains` de propósito: isso valeria para TODOS os
+    # subdomínios, incluindo webmail.rvautopecas.com.br e qualquer outro
+    # que a KingHost use. Se um deles não tiver HTTPS, para de abrir — e
+    # HSTS é difícil de desfazer, porque o navegador lembra por 2 anos.
+    # O domínio principal fica igualmente protegido sem isso.
+    Strict-Transport-Security = "max-age=63072000"
+
+    # Mesma política do <meta> no index.html, agora como cabeçalho — que
+    # é mais forte, porque vale antes de o HTML ser interpretado. A
+    # diferença é `frame-ancestors`, que só funciona aqui.
+    Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; frame-src https://www.google.com; upgrade-insecure-requests"
+
+# ---------------------------------------------------------------------
+# Os arquivos de assets têm hash no nome e nunca mudam de conteúdo:
+# pode guardar por um ano no navegador do visitante.
+# ---------------------------------------------------------------------
+[[headers]]
+  for = "/assets/*"
+
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
